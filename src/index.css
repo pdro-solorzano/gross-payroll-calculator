@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --font-header: "Spline Sans";
+  --font-body: "Inter";
+}
+
+:root {
+  --background-gradient: linear-gradient(
+    141deg,
+    rgb(1, 6, 18) 0%,
+    rgb(23, 39, 94) 51%,
+    rgba(1, 6, 18, 1) 100%
+  );
+}
