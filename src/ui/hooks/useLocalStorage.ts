@@ -4,7 +4,7 @@ type Props<T> = { locStorageItemName: string; initialValue: T };
 function useLocalStorage<T>({
   locStorageItemName,
   initialValue,
-}: Props<T>): [T, React.Dispatch<T>] {
+}: Props<T>): [T, (value: T | ((prev: T) => T)) => void] {
   const [appData, setAppData] = useState<T>(() => {
     const localStorageAppData = localStorage.getItem(locStorageItemName);
     if (!localStorageAppData) {
