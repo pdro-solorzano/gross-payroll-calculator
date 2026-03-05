@@ -5,6 +5,7 @@ import type {
   TimesheetData,
   TimesheetMap,
   UIState,
+  UpdatableAppData,
 } from "../models/models";
 import { updateDayWorkedHours } from "./periodOperations";
 import {
