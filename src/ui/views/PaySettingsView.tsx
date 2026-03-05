@@ -2,8 +2,16 @@ import { FirstBusinessDaySelector } from "../components/FirstBusinessDaySelector
 import { NumberField } from "../components/NumberField.tsx";
 import { PayPeriodSelector } from "../components/PayPeriodSelector.tsx";
 import { Button } from "../components/Button.tsx";
+import type { AppData, ReadyAppData } from "../../models/models.ts";
 
-function PaySettingsView() {
+interface Props {
+  appData: AppData;
+  onChangeHourlyRate: (
+    newHourlyRate: ReadyAppData["data"]["hourlyRate"],
+  ) => void;
+}
+
+function PaySettingsView({ appData, onChangeHourlyRate }: Props) {
   return (
     <>
       <div className="space-y-3.5 lg:space-y-5">

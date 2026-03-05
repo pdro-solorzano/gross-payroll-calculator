@@ -1,4 +1,3 @@
-import { table } from "console";
 import { DayTimesheetData } from "../components/DayTimesheetData";
 
 function TimesheetView() {
