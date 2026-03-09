@@ -1,8 +1,88 @@
-function newNumberFieldLogic(
-  oldValue: number,
-  newValue: number,
-  allowZero?: boolean,
-) {}
+interface NumberLogicParams {
+  oldValue: string;
+  newValue: string;
+  allowZero?: boolean;
+}
+
+function newNumberFieldLogic({
+  oldValue,
+  newValue,
+}: NumberLogicParams): string {
+  let returnValue: string;
+
+  if (oldValue.length === 10 && newValue.length > 10) {
+    returnValue = oldValue;
+    return returnValue;
+  }
+
+  if (newValue.length < oldValue.length) {
+    // Erase or replace
+    if (newValue === "") {
+      // Erase all
+      returnValue = "0";
+    } else if (newValue === ".") {
+      // replace all with dot
+      returnValue = "0.";
+    } else if (newValue.split(".").length > 2) {
+      returnValue = oldValue;
+    } else {
+      returnValue = newValue;
+    }
+  } else {
+    // write new caracter
+    if (
+      (oldValue.includes(".") &&
+        oldValue.indexOf(".") + 3 === oldValue.length &&
+        newValue.split(".")[1].length > 2) ||
+      newValue.split(".").length > 2
+    ) {
+      returnValue = oldValue;
+      return returnValue;
+    }
+    switch (newValue.slice(-1)) {
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+        if (oldValue === "0") {
+          // If 0 already exists and writing before dot. replace it
+          returnValue = newValue.slice(-1);
+        } else {
+          returnValue = newValue;
+        }
+        /* if (oldValue.includes(".")) {
+            REGLA GENERAL
+        } */
+        // if writing after dot just allow 2 digits
+
+        break;
+      case "0":
+        if (oldValue === "0") {
+          // if already a 0 dont write to avoid 00001 leave 0 alone
+          returnValue = oldValue;
+        } else {
+          returnValue = newValue;
+        }
+        break;
+      case ".":
+        if (!oldValue.includes(".")) {
+          returnValue = newValue;
+        } else {
+          returnValue = oldValue;
+        }
+        break;
+      default:
+        returnValue = oldValue;
+    }
+  }
+
+  return returnValue;
+}
 
 function numberFieldLogic(
   oldValue: string,
@@ -86,4 +166,4 @@ function numberFieldLogic(
   return returnValue;
 }
 
-export { numberFieldLogic };
+export { numberFieldLogic, newNumberFieldLogic };
